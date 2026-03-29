@@ -4,16 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medical Record Form<Form></Form></title>
-    <style>/* Stylesheet */
-        body { margin: auto; background-color: beige;} /* */
-        #Heading { text-align: center; font-weight: bold; font-size: 40px; text-decoration: underline; margin-left: 20px; } /* */
-        .Sections { text-align: left; font-weight: bold; font-size: 25px; text-decoration: underline; } /* */
-        .topMargin { margin-top: 30px; } /* */
-        .RequiredError { color: red; } /* */
-        .vaccine {padding: 16px;}
-        .row { padding: 10px 20px; }
-        .submit {text-align: center;}
-    </style>
+    <link rel="stylesheet" href="..\stylesheet\medStyle.css">
 </head>
 <body>
         
@@ -33,7 +24,9 @@
     <!-- Gender section-->
     <div class="row">
         <label> Gender:</label>
-        <input type="radio" name="option" value="1">Male<input type="radio" name="option" value="2">Female<input type="radio" name="option" value="3">Other
+        <input type="radio" name="option" value="1">Male
+        <input type="radio" name="option" value="2">Female
+        <input type="radio" name="option" value="3">Other
         <span class="RequiredError">*</span> 
     </div>
 
@@ -130,8 +123,5 @@
     <div class="submit">
         <button> Submit</button>
     </div>
-
-
-
 </body>
 </html>
