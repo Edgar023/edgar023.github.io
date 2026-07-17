@@ -281,12 +281,17 @@ html {
 	gap: 2rem;
 }
 
-.about-title {
-	margin: 0.5rem 0 0;
+.about-title,
+.projects-section-title,
+.projects-grid-title {
 	font-size: 1.5rem;
 	font-weight: 800;
 	letter-spacing: -0.02em;
 	color: #e4e4e7;
+}
+
+.about-title {
+	margin: 0.5rem 0 0;
 	opacity: 0;
 	transform: translateY(8px);
 	animation: about-fade-up 0.6s ease-out 0.1s forwards;
@@ -327,10 +332,6 @@ html {
 
 .projects-section-title {
 	margin: 0 0 1.5rem;
-	color: #e4e4e7;
-	font-size: 1.25rem;
-	font-weight: 700;
-	letter-spacing: -0.025em;
 }
 
 .projects-grid-header {
@@ -339,10 +340,6 @@ html {
 
 .projects-grid-title {
 	margin: 0;
-	color: #f4f4f5;
-	font-size: 1.5rem;
-	font-weight: 700;
-	letter-spacing: -0.025em;
 }
 
 .projects-grid-subtitle {

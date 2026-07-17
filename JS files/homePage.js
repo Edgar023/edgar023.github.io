@@ -8,6 +8,20 @@ const projectsData = [
     link: "https://edgar023.github.io/it-troubleshooting-guide.pdf"
     },
     {
+    title: "SysPulse Automated Operations Engine",
+    category: "it-support-duplicate",
+    description: "An automation-first IT support utility designed to monitor hardware vitals, log persistent host diagnostics, and execute self-healing maintenance tasks (like automated disk cleanup) to resolve tier-1 incidents proactively.",
+    tech: ["Python Scripting", "Systems Automation", "Incident Diagnostics", "Self-Healing Workflows", "SQLite Logs"],
+    link: "https://github.com/Edgar023/SysPulse"
+    },
+    {
+    title: "SysPulse Performance Agent",
+    category: "software",
+    description: "A full-stack system agent engineered in Python to capture local hardware metrics, manage concurrency-safe SQLite database logs, execute automated tier-1 self-healing directory purges, and serve a real-time web dashboard using an asynchronous polling REST API.",
+    tech: ["Python (Flask)", "SQLite", "RESTful APIs", "System Telemetry", "Self-Healing Automation"],
+    link: "https://github.com/Edgar023/SysPulse-Agent",
+    },
+    {
     title: "Java Scanner & Recursive Descent Parser",
     category: "software",
     description: "A programmatic compiler tool engineered to tokenize input character streams through lexical analysis and execute top-down recursive syntax evaluation pipelines with robust error-tracking diagnostics.",
@@ -25,7 +39,7 @@ const projectsData = [
     title: "Child Care Application Platform",
     category: "frontend",
     description: "An interactive client-side web interface utilizing modern DOM event listeners to capture user data entries, evaluate application pricing structures dynamically, and present a clean responsive UI layout.",
-    tech: ["JavaScript (ES6)", "HTML5 Forms", "CSS3 Layouts", "DOM Processing", "Dynamic Calculations"],
+    tech: ["JavaScript", "HTML5 Forms", "CSS3 Layouts", "DOM Processing", "Dynamic Calculations"],
     link: "https://github.com/Edgar023/Child-Care-Application"
     },
     {
@@ -36,7 +50,7 @@ const projectsData = [
     link: "https://edgar023.github.io/Medical-Record-Form/"
     },
     {
-    title: "Web-based Calculation Engine",
+    title: "Web-based Calculator",
     category: "frontend",
     description: "A responsive client-side calculation application engineered with pure vanilla programming to capture UI button interactions, evaluate mathematical math strings, and manage real-time input validation anomalies smoothly.",
     tech: ["JavaScript", "HTML5", "CSS3", "DOM Architecture", "Responsive Styling"],
@@ -65,7 +79,7 @@ const skillSets = {
 
 const roleContent = {
     all: {
-    subtitle: "Computer Science graduate with hands-on experience providing technical support, troubleshooting devices, and building responsive applications.",
+    subtitle: "I bridge the gap between robust system engineering, beautiful user interfaces, and dependable technical support.",
     gradient: "gradient-all"
     },
     software: {
@@ -108,53 +122,68 @@ function buildInitialDOM() {
     `).join('');
 }
 
-// 4. Update elements when filtering takes place
+// 4. View Modification Router Logic
 function updateView(role) {
     if (!roleContent[role]) role = 'all';
 
     if (role === 'all') {
-    history.replaceState(null, null, ' ');
+        history.replaceState(null, null, ' ');
     } else {
-    location.hash = role;
+        location.hash = role;
     }
 
-    // Toggle Active States on Buttons
+    // Manage Active State Buttons styling attributes
     document.querySelectorAll('.nav-btn').forEach(btn => {
-    btn.classList.remove('is-active');
+        btn.classList.remove('is-active');
     });
     const activeBtn = document.getElementById(`btn-${role}`);
     if (activeBtn) activeBtn.classList.add('is-active');
 
-    // Modify Hero Title Gradient & Text Copy
+    // Trigger Text Transitions
     const textEl = document.getElementById('hero-subtitle');
-    const gradEl = document.getElementById('hero-gradient');
+    const gridEl = document.getElementById('hero-gradient');
     textEl.style.opacity = 0;
-    textEl.style.transform = 'translateY(4px)';
     setTimeout(() => {
-    textEl.textContent = roleContent[role].subtitle;
-    gradEl.className = `hero-gradient ${roleContent[role].gradient}`;
-    textEl.style.opacity = 1;
-    textEl.style.transform = 'translateY(0)';
+        textEl.textContent = roleContent[role].subtitle;
+        gridEl.className = `hero-gradient ${roleContent[role].gradient}`;
+        textEl.style.opacity = 1;
     }, 150);
 
-    // Handle Skills Matrix Updates
+    // Re-build custom skills indicators list blocks
     const skillsContainer = document.getElementById('skills-container');
     skillsContainer.innerHTML = skillSets[role].map(skill => `
-    <span class="skill-chip">
+        <span class="skill-chip">
         ${skill}
-    </span>
+        </span>
     `).join('');
 
-    // Filter Projects Visibility Logic
+    // Filter project collections out with duplication safety checks
     projectsData.forEach((project, idx) => {
-    const cardEl = document.getElementById(`project-card-${idx}`);
-    if (!cardEl) return;
-    
-    if (role === 'all' || project.category === role) {
-        cardEl.classList.remove('project-hidden');
-    } else {
-        cardEl.classList.add('project-hidden');
-    }
+        const cardEl = document.getElementById(`project-card-${idx}`);
+        if (!cardEl) return;
+        
+        if (role === 'all') {
+        // In "View All", hide the duplicate IT version so it only shows once
+        if (project.category === 'it-support-duplicate') {
+            cardEl.classList.add('project-hidden');
+        } else {
+            cardEl.classList.remove('project-hidden');
+        }
+        } else if (role === 'it-support') {
+        // If they click IT Support, show BOTH standard IT projects and the duplicate
+        if (project.category === 'it-support' || project.category === 'it-support-duplicate') {
+            cardEl.classList.remove('project-hidden');
+        } else {
+            cardEl.classList.add('project-hidden');
+        }
+        } else {
+        // Standard categorical filtering behavior for software/frontend
+        if (project.category === role) {
+            cardEl.classList.remove('project-hidden');
+        } else {
+            cardEl.classList.add('project-hidden');
+        }
+        }
     });
 }
 
