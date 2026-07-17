@@ -80,19 +80,23 @@ const skillSets = {
 const roleContent = {
     all: {
     subtitle: "I bridge the gap between robust system engineering, beautiful user interfaces, and dependable technical support.",
-    gradient: "gradient-all"
+    gradient: "gradient-all",
+    about: "Computer Science graduate from University of Houston–Clear Lake with hands-on experience providing technical support, troubleshooting devices, and resolving user issues. I bridge the gap between building resilient software solutions and maintaining high-availability IT systems, bringing a balanced, automation-first approach to technical teams."
     },
     software: {
     subtitle: "Focusing on scalable backend logic, API architecture, clean codebases, and efficient algorithmic solutions.",
-    gradient: "gradient-software"
+    gradient: "gradient-software",
+    about: "Focused on core software engineering principles, full-stack application architecture, and computational logic. Experienced in engineering compiler tools like lexical scanners and building full-stack platforms like PlatePilot using Flask, React, and SQLite. Passionate about writing optimized backend code, managing relational databases, and applying precise algorithms to complex problem spaces."
     },
     frontend: {
     subtitle: "Crafting intuitive user experiences, responsive layouts, pixel-perfect UI components, and fluid animations.",
-    gradient: "gradient-frontend"
+    gradient: "gradient-frontend",
+    about: "Dedicated to building highly responsive client-side web interfaces that merge beautiful layout design with robust data handling. Proficient in managing complex Document Object Model (DOM) logic, creating reusable components with React, writing modern Tailwind styling sheets, and engineering clean form systems that ensure exceptional digital accessibility and user experience."
     },
     'it-support': {
     subtitle: "Dedicated to system diagnostics, network infrastructure, hardware/software troubleshooting, and rapid operational problem-solving.",
-    gradient: "gradient-it-support"
+    gradient: "gradient-it-support",
+    about: "Equipped to deliver comprehensive technical assistance across Windows, macOS, and mobile operating system environments. Proven capacity to triage hardware malfunctions, debug network connectivity dropouts, and manage Microsoft 365 administration tasks."
     }
 };
 
@@ -141,12 +145,17 @@ function updateView(role) {
 
     // Trigger Text Transitions
     const textEl = document.getElementById('hero-subtitle');
+    const aboutEl = document.getElementById('about-text');
     const gridEl = document.getElementById('hero-gradient');
     textEl.style.opacity = 0;
+    aboutEl.style.opacity = 0;
     setTimeout(() => {
         textEl.textContent = roleContent[role].subtitle;
+        aboutEl.textContent = roleContent[role].about;
         gridEl.className = `hero-gradient ${roleContent[role].gradient}`;
+
         textEl.style.opacity = 1;
+        aboutEl.style.opacity = 1;
     }, 150);
 
     // Re-build custom skills indicators list blocks
